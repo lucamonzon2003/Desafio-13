@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/head') %>
+
+    <body>
+        <%- include('../partials/header') %>
+            <main class="">
+                <h1 class="">Register</h1>
+                <form action="" method="POST" id="register">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Nombre</label>
+                        <input name="name" type="text" class="form-control" id="formGroupExampleInput">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">Email</label>
+                        <input name="email" type="email" class="form-control" id="formGroupExampleInput2">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput3" class="form-label">Contraseña<label>
+                                <input name="password" type="password" class="form-control" id="formGroupExampleInput3">
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" class="btn btn-success w-100" value="Registrar">
+                    </div>
+                </form>
+            </main>
+            
+            <script>
+                const newRegister = document.getElementById("register");
+                newRegister.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.target);
+                    const data = Object.fromEntries(formData.entries());
+
+                    const response = await fetch('/register', {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    if (response.redirected) {
+                        window.history.pushState('', null, response.url);
+                        window.location.assign(response.url);
+                    }
+                    const body = await response.json()
+                    if (body.success == false) {
+                        Toastify({
+                            text: body.error,
+                            duration: 3000,
+                            close: true,
+                            gravity: "top", // `top` or `bottom`
+                            position: "right", // `left`, `center` or `right`
+                            stopOnFocus: true, // Prevents dismissing of toast on hover
+                            style: {
+                                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                            }
+                        }).showToast();
+                    }
+                })
+            </script>
+    </body>
+
+</html>
+<!-- //TODO comparar password -->

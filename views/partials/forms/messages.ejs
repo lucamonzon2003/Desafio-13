@@ -1,0 +1,46 @@
+<h2 color="blue">centro de mensajes</h2>
+
+<form class="row g-3" id="add-message">
+    <div class="col-12">
+        <label for="inputAddress4" class="form-label">Mail</label>
+        <input name="id" type="mail" class="form-control" id="inputAddress4" placeholder="mail del usuario" required>
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Primer y segundo nombre</span>
+        <input name="nombre" type="text" aria-label="First name" class="form-control" placeholder="nombre del usuario"
+            required>
+        <input name="apellido" type="text" aria-label="Last name" class="form-control"
+            placeholder="apellido del usuario" required>
+    </div>
+    <div class="col-6">
+        <label for="inputAddress3" class="form-label">Edad</label>
+        <input name="edad" type="number" class="form-control" id="inputAddres3" placeholder="edad del usuario" required>
+    </div>
+    <div class="col-6">
+        <label for="inputAddress4" class="form-label">Alias</label>
+        <input name="alias" type="text" class="form-control" id="inputAddress4" placeholder="alias del usuario"
+            required>
+    </div>
+    <div class="col-12">
+        <label for="inputAddress5" class="form-label">Avatar</label>
+        <input name="avatar" type="url" class="form-control" id="inputAddress5"
+            placeholder="url avatar(foto o logo) del usuario" required>
+    </div>
+    <div class="input-group">
+        <label for="inputAddress6" class="form-label">Mensaje</label>
+        <input name="mensaje" type="text" class="form-control" id="inputAddress6" required>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </div>
+</form>
+
+<script>
+    const addMessage = document.getElementById("add-message");
+    addMessage.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        socket.emit('NEW_MESSAGE_CLI', data);
+      });
+</script>

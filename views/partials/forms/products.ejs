@@ -1,0 +1,30 @@
+<h2>Ingresar nuevo producto</h2>
+<form action="/api/products" method="POST" id="addProduct">
+    <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">Titulo</label>
+        <input name="title" type="text" class="form-control" id="formGroupExampleInput" placeholder="Ingrese un titulo para su producto">
+    </div>
+    <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label">Precio<label>
+        <input name="price" type="number" class="form-control" id="formGroupExampleInput2"
+            placeholder="Ingrese un precio">
+    </div>
+    <div class="mb-3">
+        <label for="formGroupExampleInput3" class="form-label">Imagen (URL)</label>
+        <input name="thumbnail" type="text" class="form-control" id="formGroupExampleInput3"
+            placeholder="Ingrese una url valida">
+    </div>
+    <div class="mb-3">
+        <input type="submit" class="btn btn-success w-100" value="Guardar">
+    </div>
+</form>
+
+<script>
+    const newProduct = document.getElementById('addProduct');
+    newProduct.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        socket.emit('NEW_PRODUCT_CLI', data);
+    })
+</script>
