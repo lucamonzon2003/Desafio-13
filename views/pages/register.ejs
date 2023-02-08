@@ -47,7 +47,7 @@
                     const body = await response.json()
                     if (body.success == false) {
                         Toastify({
-                            text: body.error,
+                            text: body.error == 'Unauthorized' ? "Ya existe una cuenta con el mismo mail!" : body.error,
                             duration: 3000,
                             close: true,
                             gravity: "top", // `top` or `bottom`

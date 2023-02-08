@@ -29,7 +29,7 @@ router.get("/newProduct", async (req, res, next) => {
 router.get("/chat", async (req, res, next) => {
     // TODO /chat
 })
-router.get("/error", async (req, res, next) => {
+router.get("/error", async (_req, res, next) => {
     res.status(200).render('pages/error', {title: "Error"})
 })
 router.get("/mock", async (_req, res, next) => {

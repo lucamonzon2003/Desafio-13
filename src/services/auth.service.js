@@ -12,22 +12,19 @@ class AuthService {
             if (!data) return false;
             const user = data[0]
             console.log(user)
-            await bcrypt.compare(password, user.password).then(function(result) {
-                if(!result) return false;
+            await bcrypt.compare(password, user.password).then(function (result) {
+                if (!result) return false;
             });
             return new UserResponseDTO(user).build()
         } catch (err) {
             throw new Error(err)
         }
     }
-    async register(data){
+    async register(data) {
         try {
-        const user = await userService.create(data)
-        return new UserResponseDTO(user).build()
-        } catch(err) {
-            if(err.code === 11000) {
-                throw new Error("Ya existe una cuenta con el mismo mail")
-            }
+            const user = await userService.create(data)
+            return new UserResponseDTO(user).build()
+        } catch (err) {
             throw new Error(err)
         }
     }

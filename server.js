@@ -1,7 +1,10 @@
 import http from './src/app.js';
-import dbConfig from './src/services/databases/config/mongo.js';
-import mongoose from 'mongoose'
-import minimist from 'minimist'
+
+import minimist from 'minimist';
+import cluster from 'cluster';
+import os from 'os';
+
+const numCPU = os.cpus().length
 
 const argv = minimist(process.argv.slice(2), {
     alias: {
@@ -9,12 +12,15 @@ const argv = minimist(process.argv.slice(2), {
     }
 });
 
-// t
 const PORT = argv?.port || 8081;
 
-
-mongoose.connect(dbConfig.mongoUri, dbConfig.config).then(() => {
-    http.listen(PORT, () => console.info(`Server up and running on port ${PORT}`))
-}).catch(err => {
-    console.error(err.message)
-})
+if (cluster.isPrimary) {
+    for (let i = 0; i < numCPU; i++) {
+        cluster.fork()
+    }
+    cluster.on('exit', function() {
+        console.log(`process ${process.pid} died`)
+    })
+} else {
+    http.listen(PORT, () => console.info(`Server up and running on port ${PORT}, PID ${process.pid}`))
+}
