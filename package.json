@@ -1,13 +1,15 @@
 {
-  "name": "desafio-9",
+  "name": "desafio-13",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
   "type": "module",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node . -p8080",
-    "start:dev": "nodemon . -p8080"
+    "start:dev": "nodemon . -p8080 -m cluster",
+    "pm2:fork": "pm2 start server.js --watch",
+    "pm2:cluster": "pm2 start server.js -i 4 --watch"
   },
   "keywords": [],
   "author": "",

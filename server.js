@@ -8,19 +8,22 @@ const numCPU = os.cpus().length
 
 const argv = minimist(process.argv.slice(2), {
     alias: {
-        p: 'port'
+        p: 'port',
+        m: 'modo'
     }
 });
 
-const PORT = argv?.port || 8081;
-
-if (cluster.isPrimary) {
-    for (let i = 0; i < numCPU; i++) {
-        cluster.fork()
+if(argv?.m == 'cluster') {
+    if (cluster.isPrimary) {
+        for (let i = 0; i < numCPU; i++) {
+            cluster.fork()
+        }
+        cluster.on('exit', function() {
+            console.log(`process ${process.pid} died`)
+        })
+    } else {
+        http.listen(argv?.port + cluster.worker.id, () => console.info(`Server up and running on port ${argv?.port + cluster.worker.id}, PID ${process.pid}`))
     }
-    cluster.on('exit', function() {
-        console.log(`process ${process.pid} died`)
-    })
 } else {
-    http.listen(PORT, () => console.info(`Server up and running on port ${PORT}, PID ${process.pid}`))
+    http.listen(8080, () => console.info(`Server up and running on port ${argv?.port}, PID ${process.pid}`))
 }
