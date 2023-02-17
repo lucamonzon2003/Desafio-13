@@ -7,11 +7,12 @@ import session from 'express-session';
 import http from 'http';
 import { Server as IoServer } from 'socket.io';
 import passport from 'passport';
-import { Strategy as LocalStrategy } from 'passport-local'
-// const LocalStrategy = require('passport-local').Strategy
+import { Strategy as LocalStrategy } from 'passport-local';
+// const LocalStrategy = require('passport-local').Strategy;
+import compression from 'compression';
 dotenv.config();
 
-import indexRouter from './routes/index.routes.js'
+import indexRouter from './routes/index.routes.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import authService from './services/auth.service.js';
 import userService from './services/user.service.js';
@@ -26,6 +27,7 @@ const io = new IoServer(server);
 
 mongoose.connect(dbConfig.mongoUri, dbConfig.config)
 
+app.use(compression())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

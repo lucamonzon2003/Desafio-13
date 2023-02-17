@@ -14,7 +14,9 @@ router.get('/info', (_req, res, next) => {
             "Path de ejecución": process.execPath,
             "Process id": process.pid,
             "Carpeta del proyecto": process.cwd(),
-            "Numero de procesadores en el servidor": os.cpus().length
+            "Numero de procesadores en el servidor": os.cpus().length,
+            "Peso de la ruta sin comprimir": 633,
+            "Peso de la ruta comprimida": 654
         })
     } catch (err) {
         next(err)
