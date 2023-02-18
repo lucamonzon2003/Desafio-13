@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv'
 import _ from 'lodash';
-import logger from 'morgan';
+import logger from './config/logger.js';
 import MongoStore from 'connect-mongo';
 import session from 'express-session';
 import http from 'http';
@@ -96,7 +96,11 @@ app.use(passport.session());
 //     });
 // });
 
-
-app.use(indexRouter)
+// app.use((req, _res, next) => {
+//     logger.info(`${req.method} & ${req.url}`)
+//     next();
+// })
+//TODO resolver problema con el authMiddleware
+app.use(indexRouter);
 app.use(errorHandler);
 export default server;

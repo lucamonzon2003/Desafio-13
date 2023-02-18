@@ -15,7 +15,7 @@ router.get("/health", (_req, res) => {
 
 router.use(client);
 router.use(auth);
-router.use('/api', random);
+// router.use('/api', random);
 router.use(info);
 
 

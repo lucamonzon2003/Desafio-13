@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node . -p8080",
-    "start:dev": "nodemon . -p8080 -m cluster",
+    "start:dev": "nodemon . -p8080 -m fork",
     "pm2:fork": "pm2 start server.js --watch",
     "pm2:cluster": "pm2 start server.js -i 4 --watch"
   },
@@ -33,6 +33,7 @@
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "socket.io": "^4.5.4"
+    "socket.io": "^4.5.4",
+    "winston": "^3.8.2"
   }
 }
