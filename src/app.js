@@ -25,7 +25,7 @@ const app = express();
 const server = http.createServer(app)
 const io = new IoServer(server);
 
-mongoose.connect(dbConfig.mongoUri, dbConfig.config)
+mongoose.connect(dbConfig.mongoUri, dbConfig.config, console.info('db connect!'))
 
 app.use(compression())
 app.use(express.json());
@@ -58,8 +58,8 @@ passport.use('login', new LocalStrategy({
 
 passport.use('register', new LocalStrategy({ usernameField: "email", passReqToCallback: true }, async (req, email, password, done) => {
     try {
-        const { name } = req.body
-        const userData = await authService.register({ email, password, name });
+        const { name, adress, phone, age } = req.body
+        const userData = await authService.register({ email, password, name, adress, phone, age });
         //TODO probar pasar solo req.body
         if (!userData) {
             return done(null, false);

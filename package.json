@@ -6,8 +6,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node . -p8080",
-    "start:dev": "nodemon . -p8080 -m fork",
+    "start": "node . -p8080 -m cluster",
+    "start:dev": "nodemon . -p8080 -m cluster",
     "pm2:fork": "pm2 start server.js --watch",
     "pm2:cluster": "pm2 start server.js -i 4 --watch"
   },
@@ -31,6 +31,7 @@
     "minimist": "^1.2.7",
     "moongose": "^1.0.0",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "socket.io": "^4.5.4",

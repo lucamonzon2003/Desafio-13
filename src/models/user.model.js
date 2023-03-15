@@ -18,20 +18,20 @@ const usersSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    lastName: {
-        type: String,
-        // require: true
-    },
     age: {
         type: Number
     },
-    alias: {
-        type: String,
+    adress: {
+        type: String
+    },
+    phone: {
+        type: String
     },
     avatar: {
         type: String,
         default: 'https://cdn2.vectorstock.com/i/1000x1000/57/91/profile-avatar-icon-design-template-vector-28515791.jpg'
-    }
+    },
+    //TODO IMAGEN EN CARPETA PUBLIC
 })
 
 usersSchema.pre('save', async function(next) {

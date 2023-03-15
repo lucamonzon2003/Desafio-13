@@ -21,6 +21,22 @@
                                 <input name="password" type="password" class="form-control" id="formGroupExampleInput3">
                     </div>
                     <div class="mb-3">
+                        <label for="formGroupExampleInput4" class="form-label">Dirección</label>
+                        <input name="adress" type="text" class="form-control" id="formGroupExampleInput4">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput5" class="form-label">Edad</label>
+                        <input name="age" type="number" class="form-control" id="formGroupExampleInput5">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput6" class="form-label">Numero de telefono</label>
+                        <input name="phone" type="tel" class="form-control" id="phone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput7" class="form-label">Avatar</label>
+                        <input name="avatar" type="file" accept=".jpg,.png,.jpeg" class="form-control" id="formGroupExampleInput6">
+                    </div>
+                    <div class="mb-3">
                         <input type="submit" class="btn btn-success w-100" value="Registrar">
                     </div>
                 </form>
@@ -61,6 +77,12 @@
                 })
             </script>
     </body>
-
+    <script>
+        const phoneInputField = document.querySelector("#phone");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+          utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+      </script>
 </html>
 <!-- //TODO comparar password -->

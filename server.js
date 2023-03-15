@@ -19,7 +19,7 @@ if(argv?.m == 'cluster') {
             cluster.fork()
         }
         cluster.on('exit', function() {
-            console.log(`process ${process.pid} died`)
+            console.info(`process ${process.pid} died`)
         })
     } else {
         http.listen(argv?.port + cluster.worker.id, () => console.info(`Server up and running on port ${argv?.port + cluster.worker.id}, PID ${process.pid}`))

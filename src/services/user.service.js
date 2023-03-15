@@ -7,6 +7,7 @@ class UserService {
     }
     async create(data){
         const user = new UserCreateDTO(data).build();
+        console.log(user)
         const newUser = await this.dao.create(user);
         return newUser;
     }
