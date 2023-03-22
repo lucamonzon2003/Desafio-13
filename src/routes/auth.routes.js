@@ -26,12 +26,12 @@ router.get("/logout", async (req, res, next) => {
     }
 })
 
-router.post("/register", passport.authenticate('register', upload.single('avatar'), { failureMessage: true, failWithError: true }), async (req, res, next) => {
+router.post("/register", passport.authenticate('register',{ failureMessage: true, failWithError: true }), upload.single('avatar'), async (req, res, next) => {
     try {
         req.session.user = req.user
-        const avatar = req.file.avatar
         res.redirect('/')
         // register(req, res, next);
+        //TODO no funciona multer
     } catch (err) {
         next(err)
     }

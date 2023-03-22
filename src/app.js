@@ -64,7 +64,7 @@ passport.use('register', new LocalStrategy({ usernameField: "email", passReqToCa
         if (!userData) {
             return done(null, false);
         }
-        done(null, userData);
+        done(null, userData)
     } catch(err) {
         done(null, false)
     }
