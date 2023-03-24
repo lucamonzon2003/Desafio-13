@@ -1,0 +1,23 @@
+<dl class="row" id="message-list">
+    <% mensajes.forEach(i =>{ %>
+    <dt class="col-sm-3"> <%= i.alias%> </dt>
+    <dd class="col-sm-9">
+        <dt class="col-sm-2">  <img src=" <%= i.avatar%> " width="50" height="50"> </dt>
+        <dt class="col-sm-2"> <%= i.fyh%> </dt>
+        <dd class="col-sm-8"> <%= i.mensaje% </dd>
+    </dd>
+    <% }); %>
+</dl>
+
+<script>
+socket.on('NEW_MESSAGE_SERVER', message => {
+    const newChat = document.getElementById('message-list')
+    newChat.innerHTML += `
+    <dt class="col-sm-3"> ${message.alias} </dt>
+    <dd class="col-sm-9">
+        <dt class="col-sm-2"> <img src="${message.avatar}" width="50" height="50"> </dt>
+        <dt class="col-sm-2"> ${message.fyh} </dt>
+        <dd class="col-sm-8"> ${message.mensaje} </dd>
+    </dd>`
+  })
+</script>

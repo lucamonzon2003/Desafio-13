@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/head') %>
+
+    <body>
+        <%- include('../partials/header') %>
+            <main class="">
+                <h1 class="">Register</h1>
+                <form action="/register" method="POST" id="register" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Nombre</label>
+                        <input name="name" type="text" class="form-control" id="formGroupExampleInput">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">Email</label>
+                        <input name="email" type="email" class="form-control" id="formGroupExampleInput2">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput3" class="form-label">Contraseña<label>
+                                <input name="password" type="password" class="form-control" id="formGroupExampleInput3">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput4" class="form-label">Dirección</label>
+                        <input name="adress" type="text" class="form-control" id="formGroupExampleInput4">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput5" class="form-label">Edad</label>
+                        <input name="age" type="number" class="form-control" id="formGroupExampleInput5">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput6" class="form-label">Numero de telefono</label>
+                        <input name="phone" type="tel" class="form-control" id="phone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput7" class="form-label">Avatar</label>
+                        <input name="avatar" type="file" accept=".jpg,.png,.jpeg" class="form-control" id="formGroupExampleInput6">
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" class="btn btn-success w-100" value="Registrar">
+                    </div>
+                </form>
+            </main>
+            
+            <script>
+                const newRegister = document.getElementById("register");
+                newRegister.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.target);
+                    const data = Object.fromEntries(formData.entries());
+
+                    const response = await fetch('/register', {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    if (response.redirected) {
+                        window.history.pushState('', null, response.url);
+                        window.location.assign(response.url);
+                    }
+                    const body = await response.json()
+                    if (body.success == false) {
+                        Toastify({
+                            text: body.error == 'Unauthorized' ? "Ya existe una cuenta con el mismo mail!" : body.error,
+                            duration: 3000,
+                            close: true,
+                            gravity: "top", // `top` or `bottom`
+                            position: "right", // `left`, `center` or `right`
+                            stopOnFocus: true, // Prevents dismissing of toast on hover
+                            style: {
+                                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                            }
+                        }).showToast();
+                    }
+                })
+            </script>
+    </body>
+    <script>
+        const phoneInputField = document.querySelector("#phone");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+          utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+      </script>
+</html>
+<!-- //TODO comparar password -->
