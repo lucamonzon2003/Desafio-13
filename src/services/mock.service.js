@@ -7,7 +7,7 @@ class MockService {
         return {
             title: faker.commerce.product(),
             price: faker.commerce.price(100, 1000, 0, '$'),
-            thumbnail: faker.image.business(300, 300)
+            thumbnail: faker.image.business(300, 300),
         }
     }
 }

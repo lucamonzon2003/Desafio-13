@@ -1,13 +1,14 @@
 <h2>Ingresar nuevo producto</h2>
-<form action="/api/products" method="POST" id="addProduct">
+<form action="/newProduct" method="POST" id="addProduct">
     <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">Titulo</label>
-        <input name="title" type="text" class="form-control" id="formGroupExampleInput" placeholder="Ingrese un titulo para su producto">
+        <input name="title" type="text" class="form-control" id="formGroupExampleInput"
+            placeholder="Ingrese un titulo para su producto">
     </div>
     <div class="mb-3">
         <label for="formGroupExampleInput2" class="form-label">Precio<label>
-        <input name="price" type="number" class="form-control" id="formGroupExampleInput2"
-            placeholder="Ingrese un precio">
+                <input name="price" type="number" class="form-control" id="formGroupExampleInput2"
+                    placeholder="Ingrese un precio">
     </div>
     <div class="mb-3">
         <label for="formGroupExampleInput3" class="form-label">Imagen (URL)</label>
@@ -20,11 +21,44 @@
 </form>
 
 <script>
-    const newProduct = document.getElementById('addProduct');
-    newProduct.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData.entries());
-        socket.emit('NEW_PRODUCT_CLI', data);
-    })
+    // const newProduct = document.getElementById('addProduct');
+    // newProduct.addEventListener('submit', async (e) => {
+    //     e.preventDefault();
+    //     const formData = new FormData(e.target);
+    //     const data = Object.fromEntries(formData.entries());
+
+    //     const response = await fetch('/newProduct', {
+    //         method: 'POST',
+    //         body: JSON.stringify(data),
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         }
+    //     })
+
+    //     if (body.success == true) {
+    //                     Toastify({
+    //                         text: "Producto cargado con exito!",
+    //                         duration: 3000,
+    //                         close: true,
+    //                         gravity: "top", // `top` or `bottom`
+    //                         position: "right", // `left`, `center` or `right`
+    //                         stopOnFocus: true, // Prevents dismissing of toast on hover
+    //                         style: {
+    //                             background: "linear-gradient(to right, #00b09b, #96c93d)",
+    //                         }
+    //                     }).showToast();
+    //                 } else {
+    //                     Toastify({
+    //                         text: body.error,
+    //                         duration: 3000,
+    //                         close: true,
+    //                         gravity: "top", // `top` or `bottom`
+    //                         position: "right", // `left`, `center` or `right`
+    //                         stopOnFocus: true, // Prevents dismissing of toast on hover
+    //                         style: {
+    //                             background: "linear-gradient(to right, #00b09b, #96c93d)",
+    //                         }
+    //                     })
+    //                 }
+    //  })
 </script>

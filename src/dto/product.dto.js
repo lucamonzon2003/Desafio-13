@@ -19,6 +19,7 @@ export class ProductResponseDTO {
         this.title = product.title
         this.price = product.price
         this.thumbnail = product.thumbnail
+        this.stock = product.stock
     }
     build(){
         return this

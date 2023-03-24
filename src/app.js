@@ -16,6 +16,7 @@ import indexRouter from './routes/index.routes.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import authService from './services/auth.service.js';
 import userService from './services/user.service.js';
+import ProductService from './services/products.service.js';
 
 import dbConfig from './services/databases/config/mongo.js';
 import mongoose from 'mongoose';
@@ -46,9 +47,7 @@ app.use(session({
     resave: true
 }));
 
-passport.use('login', new LocalStrategy({
-    usernameField: "email"
-}, async (email, password, done) => {
+passport.use('login', new LocalStrategy({ usernameField: "email" }, async (email, password, done) => {
     const userData = await authService.login(email, password);
     if (!userData) {
         return done(null, false);
@@ -65,7 +64,7 @@ passport.use('register', new LocalStrategy({ usernameField: "email", passReqToCa
             return done(null, false);
         }
         done(null, userData)
-    } catch(err) {
+    } catch (err) {
         done(null, false)
     }
 }))
@@ -89,17 +88,13 @@ app.use(passport.session());
 //         console.info(message);
 //         io.sockets.emit('NEW_MESSAGE_SERVER', message);
 //     });
-//     socket.on('NEW_PRODUCT_CLI', async product => {
-//         await productDb.save(product)
+//     socket.on('NEW_PRODUCT_CLI', async products => {
+//         const product = await ProductService.create(products);
 //         console.info(product);
 //         io.sockets.emit('NEW_PRODUCT_SERVER', product);
 //     });
 // });
 
-// app.use((req, _res, next) => {
-//     logger.info(`${req.method} & ${req.url}`)
-//     next();
-// })
 //TODO resolver problema con el authMiddleware
 app.use(indexRouter);
 app.use(errorHandler);
